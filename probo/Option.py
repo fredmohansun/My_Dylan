@@ -77,5 +77,5 @@ def call(option, spot):
 def put(option, spot):
     return maximum(option.strike-spot,0)
     
-def asianStrike(option):
+def AsianStrike(option):
     pass
