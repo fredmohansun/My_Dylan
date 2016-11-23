@@ -8,6 +8,7 @@ Created on Wed Nov 16 17:52:36 2016
 import abc
 import numpy as np
 from scipy.stats import binom
+from scipy.stats import norm
 
 class PriceEngine(object, metaclass = abc.ABCMeta):
 
@@ -86,3 +87,27 @@ def BinomEuropean(PriceEngine, option, asset):
     return price
     
 class AnalyticalEngine(PriceEngine):
+    
+    def __init__(self, pricer):
+        self.__pricer = pricer
+        
+    def pricing(self, option, asset):
+        return self.__pricer(self, option, asset)
+        
+def BlackScholesMerton(PricingEngine, option, asset):
+    pass
+"""    
+    (s0,r,sigma,div) = asset.GetData()
+    K = option.strike
+    T = option.expiry
+    
+    d1 = (np.log(s0/K) + (r-div+.5*sigma*sigma))/(sigma * np.sqrt(T))
+    d2 = d1 - (sigma * np.sqrt(T)
+    
+    if option.payoff is call:
+        price = s0 * np.exp(-div*T)*norm.cdf(d1)-K*exp(-r*T)*norm.cdf(d2)
+    elif option.payoff is put:
+        price = -s0 * np.exp(-div*T)*norm.cdf(-d1)+K*exp(-r*T)*norm.cdf(-d2)
+     
+    return price
+"""

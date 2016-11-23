@@ -16,7 +16,7 @@ sigma = .3
 r = .08
 div = 0
 N = 3
-M = 1000000
+M = 10000
 
 h = T/N
 nuh = (r-div-0.5*sigma*sigma)*h
